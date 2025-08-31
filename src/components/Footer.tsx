@@ -19,14 +19,12 @@ export const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="flex items-center justify-center w-20 h-20">
-                <img src="/src/assets/LogoRS.png" alt="RepScribe Logo" className="w-13 h-13 object-contain" />
+              <div className="flex items-center justify-center w-10 h-10">
+                <img src="/logo-rs.png" alt="RepScribe logo" className="h-8 w-auto" />
               </div>
               <span className="text-xl font-bold text-white">{t('logo')}</span>
             </Link>
-            <p className="text-sm text-gray-400 max-w-xs">
-              {t('footer.description')}
-            </p>
+            <p className="text-sm text-gray-400 max-w-xs">{t('footer.description')}</p>
           </div>
 
           {/* Product */}
@@ -91,8 +89,7 @@ export const Footer = () => {
           <p className="text-sm text-gray-400">
             © {new Date().getFullYear()} RepScribe. All rights reserved.
           </p>
-          
-          {/* Language Switcher */}
+
           <button
             className="flex items-center space-x-1 text-sm font-medium text-gray-400 hover:text-emerald-400 transition-colors"
             onClick={() => handleLanguageChange(currentLang === 'en' ? 'cs' : 'en')}

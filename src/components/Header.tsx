@@ -11,7 +11,8 @@ export const Header = () => {
   const handleLanguageChange = (lang: Language) => {
     setLanguage(lang);
     setCurrentLang(lang);
-    window.location.reload(); // Simple reload to update all translations
+    // simple hard reload so all strings update (keeps code minimal for MVP)
+    window.location.reload();
   };
 
   const isActive = (path: string) => location.pathname === path;
@@ -20,75 +21,76 @@ export const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/20 backdrop-blur-md supports-[backdrop-filter]:bg-black/10">
       <div className="container-padding">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
+          {/* Brand */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <div className="flex items-center justify-center w-20 h-20">
-              <img src="/src/assets/LogoRS.png" alt="RepScribe Logo" className="w-13 h-13 object-contain" />
+            <div className="flex items-center justify-center w-10 h-10">
+              {/* served from /public */}
+              <img src="/logo-rs.png" alt="RepScribe logo" className="h-8 w-auto" />
             </div>
             <span className="text-xl font-bold text-white">{t('logo')}</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/demo" 
+            <Link
+              to="/demo"
               className={`text-sm font-medium transition-colors hover:text-emerald-400 relative ${
                 isActive('/demo') ? 'text-emerald-400' : 'text-gray-300'
               }`}
             >
               {t('footer.demo')}
               {isActive('/demo') && (
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
+                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400" />
               )}
             </Link>
-            <Link 
-              to="/#pricing" 
+
+            <Link
+              to="/#pricing"
               className="text-sm font-medium text-gray-300 hover:text-emerald-400 transition-colors"
             >
               {t('footer.pricing')}
             </Link>
-            <Link 
-              to="/app" 
+
+            <Link
+              to="/app"
               className={`text-sm font-medium transition-colors hover:text-emerald-400 relative ${
                 isActive('/app') ? 'text-emerald-400' : 'text-gray-300'
               }`}
             >
               {t('hero.secondaryCTA')}
               {isActive('/app') && (
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
+                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400" />
               )}
             </Link>
           </nav>
 
-          {/* Language Switcher & Mobile Menu Button */}
+          {/* Language + mobile menu */}
           <div className="flex items-center space-x-4">
-            {/* Language Switcher */}
-            <div className="relative">
-              <button
-                className="flex items-center space-x-1 text-sm font-medium text-gray-300 hover:text-emerald-400 transition-colors"
-                onClick={() => handleLanguageChange(currentLang === 'en' ? 'cs' : 'en')}
-              >
-                <Globe className="h-4 w-4" />
-                <span>{currentLang.toUpperCase()}</span>
-              </button>
-            </div>
+            <button
+              className="flex items-center space-x-1 text-sm font-medium text-gray-300 hover:text-emerald-400 transition-colors"
+              onClick={() => handleLanguageChange(currentLang === 'en' ? 'cs' : 'en')}
+              aria-label="Switch language"
+            >
+              <Globe className="h-4 w-4" />
+              <span>{currentLang.toUpperCase()}</span>
+            </button>
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/10 transition-colors text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile nav */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-white/10 bg-black/40 backdrop-blur-md">
             <nav className="flex flex-col space-y-4">
-              <Link 
-                to="/demo" 
+              <Link
+                to="/demo"
                 className={`text-sm font-medium transition-colors hover:text-emerald-400 ${
                   isActive('/demo') ? 'text-emerald-400' : 'text-gray-300'
                 }`}
@@ -96,15 +98,15 @@ export const Header = () => {
               >
                 {t('footer.demo')}
               </Link>
-              <Link 
-                to="/#pricing" 
+              <Link
+                to="/#pricing"
                 className="text-sm font-medium text-gray-300 hover:text-emerald-400 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('footer.pricing')}
               </Link>
-              <Link 
-                to="/app" 
+              <Link
+                to="/app"
                 className={`text-sm font-medium transition-colors hover:text-emerald-400 ${
                   isActive('/app') ? 'text-emerald-400' : 'text-gray-300'
                 }`}
